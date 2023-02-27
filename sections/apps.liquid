@@ -20,7 +20,10 @@
   data-section-type="apps">
   <div class="{{section_width}}">
     {%- for block in section.blocks -%}
-      {% render block %}
+        {% capture app_block %}
+            {% render block %}
+        {% endcapture %}
+        {{ app_block | replace : '<script type="application/javascript">' , '<script type="lazyload_int" data-w3-type="application/javascript">' }}
     {%- endfor -%}
   </div>
 </div>

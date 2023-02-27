@@ -112,7 +112,7 @@
       {% endif %}>
       <div class="{{ item_bg_class }}"
         {% if image != blank and show_bg_color != true %}
-          data-bgset="{% render 'bgset', image: image %}"
+          style="background-image: url( {{ image | img_url: '540x' }} );"
           data-aspectratio="{{ image.aspect_ratio }}"
           data-sizes="auto"
         {% endif %}

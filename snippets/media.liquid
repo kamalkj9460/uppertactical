@@ -63,9 +63,9 @@
 
     <div class="product-single__media product-single__media--image">
       <div class="product-single__media--image-height" style="padding-top: {{ media_padding_top }}%;"></div>
-      <img class="lazyload"
-        src="{{ 'blank.gif' | asset_img_url: '1x1' }}"
-        data-src="{{ image_url_pattern }}"
+      <img class="lazyloaded"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad"
+        data-srcset="{{ image | img_url: '1512x' }} 1536w,{{ image | img_url: '1296x' }} 1280w,{{ image | img_url: '900x' }} 768w,{{ image | img_url: '540x'}} 320w"
         data-product-image
         data-image-id="{{ media.id }}"
         data-widths= "{{ image_widths }}"
@@ -93,12 +93,12 @@
               {%- render 'icon-media-video' -%}
             </span>
 
-            <img
-              srcset="{% if media.preview_image.width >= 288 %}{{ media.preview_image | img_url: '288x' }} 288w,{% endif %}
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad"
+              data-srcset="{% if media.preview_image.width >= 288 %}{{ media.preview_image | img_url: '288x' }} 288w,{% endif %}
                       {% if media.preview_image.width >= 576 %}{{ media.preview_image | img_url: '576x' }} 576w,{% endif %}
                       {% if media.preview_image.width >= 550 %}{{ media.preview_image | img_url: '550x' }} 550w,{% endif %}
                       {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w{% endif %}"
-              src="{{ media | img_url: '550x550' }}"
+              data-src="{{ media | img_url: '550x550' }}"
               sizes="(min-width: 1200px) calc((1200px - 10rem) / 2), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
               loading="lazy"
               width="576"
@@ -121,12 +121,12 @@
               {%- render 'icon-media-video' -%}
             </span>
 
-            <img
-              srcset="{% if media.preview_image.width >= 288 %}{{ media.preview_image | img_url: '288x' }} 288w,{% endif %}
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad"
+              data-srcset="{% if media.preview_image.width >= 288 %}{{ media.preview_image | img_url: '288x' }} 288w,{% endif %}
                       {% if media.preview_image.width >= 576 %}{{ media.preview_image | img_url: '576x' }} 576w,{% endif %}
                       {% if media.preview_image.width >= 550 %}{{ media.preview_image | img_url: '550x' }} 550w,{% endif %}
                       {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w{% endif %}"
-              src="{{ media | img_url: '550x550' }}"
+              data-src="{{ media | img_url: '550x550' }}"
               sizes="(min-width: 1200px) calc((1200px - 10rem) / 2), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
               loading="lazy"
               width="576"
@@ -145,12 +145,12 @@
               {%- render 'icon-media-model' -%}
             </span>
 
-            <img
-              srcset="{% if media.preview_image.width >= 288 %}{{ media.preview_image | img_url: '288x' }} 288w,{% endif %}
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad"
+              data-srcset="{% if media.preview_image.width >= 288 %}{{ media.preview_image | img_url: '288x' }} 288w,{% endif %}
                       {% if media.preview_image.width >= 576 %}{{ media.preview_image | img_url: '576x' }} 576w,{% endif %}
                       {% if media.preview_image.width >= 550 %}{{ media.preview_image | img_url: '550x' }} 550w,{% endif %}
                       {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w{% endif %}"
-              src="{{ media | img_url: '550x550' }}"
+              data-src="{{ media | img_url: '550x550' }}"
               sizes="(min-width: 1200px) calc((1200px - 10rem) / 2), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
               loading="lazy"
               width="576"

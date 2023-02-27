@@ -226,8 +226,8 @@
               {% if index > 1 %} tabindex="-1"{% endif %} >
               {%- if product.media.size > 0 -%}
                 <div class="product__media__image{% if product_grid_hover %} product__media__image--hover-{{ product_grid_hover_animation }}{% endif %} lazy-image" style="background-image: url({{ image | img_url: '1x1' }});" data-product-media-featured>
-                  <div class="product__media product__media--featured product__media--featured-visible lazyload"
-                    data-bgset="{% render 'bgset', image: image %}"
+                  <div class="product__media product__media--featured product__media--featured-visible lazyloaded"
+                    style="background-image: url({{ image | img_url: '540x' }})"
                     data-sizes="auto"
                     data-parent-fit="cover"
                     data-aspectratio="{{ image.aspect_ratio }}"
@@ -292,7 +292,7 @@
                           <div class="product__media lazyload"
                             href="{{ product.url | within: collection }}"
                             aria-label="{{ product.title | strip_html | escape }}"
-                            data-bgset="{% render 'bgset', image: image %}"
+                            style="background-image: url({{ image | img_url: '540x' }})"
                             data-sizes="auto"
                             data-parent-fit="cover"
                             data-aspectratio="{{ image.aspect_ratio }}">
@@ -460,10 +460,13 @@
                         {%- render 'icon-shopping-bag' -%}
                         <span class="btn__text">{{ 'products.product.quick_view' | t }}</span>
                         <span class="btn__loader">
+                          <img height="18" width="18" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad" data-src="{{ 'svg-loader.png' | asset_url }}" alt="">
+                          {% comment %}
                           <svg height="18" width="18" class="svg-loader">
                             <circle r="7" cx="9" cy="9" />
                             <circle stroke-dasharray="87.96459430051421 87.96459430051421" r="7" cx="9" cy="9" />
                           </svg>
+                          {% endcomment %}
                         </span>
                       </span>
                     </button>
@@ -480,10 +483,13 @@
                       {%- render 'icon-shopping-bag' -%}
                       <span class="btn__text">{{ 'products.product.quick_view' | t }}</span>
                       <span class="btn__loader">
+                        <img height="18" width="18" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad" data-src="{{ 'svg-loader.png' | asset_url }}" alt="">
+                        {% comment %}
                         <svg height="18" width="18" class="svg-loader">
                           <circle r="7" cx="9" cy="9" />
                           <circle stroke-dasharray="87.96459430051421 87.96459430051421" r="7" cx="9" cy="9" />
                         </svg>
+                        {% endcomment %}
                       </span>
                     </span>
                   </a>

@@ -130,8 +130,8 @@
         {%- if image_mobile != blank -%}
           <div class="slide__image__container slide__image__container--mobile">
             <div class="slide__image__inner">
-              <div class="slide__image bg-pos-{{ bg_position }} lazyload"
-                data-bgset="{% render 'bgset', image: image_mobile %}"
+              <div class="slide__image bg-pos-{{ bg_position }} lazyloaded"
+                style="background-image: url({{ image_mobile | img_url: '540x' }});"
                 data-sizes="auto"
                 data-parent-fit="cover">
               </div>
@@ -145,8 +145,8 @@
         <div class="slide__image__container slide__image__container--desktop{% unless image %} slide__image__container--placeholder{% endunless %}">
           <div class="slide__image__inner">
             {%- if image != blank -%}
-              <div class="slide__image bg-pos-{{ bg_position }} lazyload"
-                data-bgset="{% render 'bgset', image: image %}"
+              <div class="slide__image bg-pos-{{ bg_position }} lazyloaded"
+                style="background-image: url({{ image | img_url: '1512x' }});"
                 data-sizes="auto"
                 data-parent-fit="cover">
               </div>

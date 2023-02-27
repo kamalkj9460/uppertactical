@@ -1,0 +1,146 @@
+<style>
+
+    {% if template contains "index" %}
+    body:not(.has-scrolled) header#SiteHeader:not(.site-header--hovered) .menu__item.menu__item--icons img,.footer-bottom.wrapper .social-sharing-wrapper a.social-sharing-icon img {
+        filter: invert(1);
+    }
+    {% endif %}
+
+    .footer-bottom.wrapper .social-sharing-wrapper a.social-sharing-icon img {
+        filter: invert(1);
+    }
+    
+    .loading-overlay {display: none !important;}
+    .slider *{
+        animation:zzzx !important;
+        animation-duration:0s !important
+    }
+    .template-index #MainContent .slideshow  .slider:not(.flickity-enabled )  > .item:nth-child(2) {
+        opacity: 1 !important;
+        visibility: visible !important;
+        animation: none !important;
+    }
+    .shopify-section--marquee .top-bar__slider{
+        min-height:67.81px
+    }
+    .slider.slider--slide:not(.flickity-enabled) .item:nth-child(n+3) {
+        display: none;
+    }
+    .top-bar__scale.ticker--unloaded {
+        opacity: 1 !important;
+        position: relative;
+    }   
+    @media screen and (max-width: 767px) {
+    html body .desktop_view{
+        display:none!important;
+    }
+    .template-index:not(.has-scrolled)  .site-header .mobile-menu img {
+        filter: brightness(0) invert(1);
+    }
+    }
+    @media screen and (min-width: 768px) {
+    html body .mobile_view{
+        display:none!important;
+    }}
+    body:not(.template-index) #PageContainer {
+        padding-top: 78px!important;
+    }
+    .product-single__media-slider:not(.flickity-enabled) .product-single__media-slide:nth-child(n+2) {
+        display: none;
+    }
+    div#ProductThumbs {
+        justify-content: center;
+    }
+    
+    .slideshow .slider ol.flickity-page-dots {
+        position: absolute!important;
+        display: flex!important;
+        justify-content: center!important;
+        margin-bottom: 15px!important;
+        list-style: none!important;
+        text-align: center!important;
+        line-height: 1!important;
+        bottom: 10px!important;
+    }
+
+.template-collection main#MainContent .grid  .product-grid-item  button.btn--quick.square:hover {
+    min-width: 100px !important;
+}
+
+@media(min-width:1200px){
+.template-blog  #MainContent .blog  > .wrapper {
+    max-width: calc(1440px - 17px) !important;
+}
+
+.wrapper {
+    max-width: calc(1440px - 17px) !important;
+}
+
+  .template-index #MainContent .section-banner-with-text-columns .banners   .banners__content  .flickity-slider > .banner:nth-child(2) {
+    transform: translateX(100%)  !important;
+}
+
+.template-index  #MainContent .section-banner-with-text-columns .banners   .banners__content  .flickity-slider > .banner:nth-child(3) {
+    transform: translateX(200%)  !important;
+}
+  
+}
+
+.template-collection  .banner > .banner-inner {
+    height: auto !important;
+}
+
+@media(min-width:1200px){
+#shopify-section-header header#SiteHeader > .wrapper {
+    max-width: 100% !important;
+}  
+}
+
+  .template-collection #PageContainer #MainContent .banner  .banner-inner .banner-content {
+    padding-top: 0 !important;
+}
+    
+/*     @media(min-width:1200px){
+        .template-collection .banner  .banner-inner:not([style]) {
+            min-height: 813px;
+        }
+    }
+    @media(max-width:767px){
+        .template-collection .banner  .banner-inner:not([style]) {
+            min-height: 248vw;
+        }
+    }
+    header#SiteHeader {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    body:not(.template-index) div#PageContainer {
+        padding-top: 78px !important;
+    }
+    @media(min-width:1200px){
+         #SiteHeader a.logo__image-link.logo__image-link--home {
+              opacity: 1 !important;
+              visibility: visible !important;
+          }
+          body:not(.template-index) header#SiteHeader   a.navlink:not(.navlink--highlight)  {
+                color: black;
+          }
+    }
+    @media(max-width:767px){
+          body:not(.template-index) header#SiteHeader a.logo__image-link.logo__image-link--other {
+              opacity: 1 !important;
+              visibility: visible !important;
+          }
+          body:not(.template-index) header#SiteHeader .icon {
+              fill: black;
+              display: inline-block;
+              width: 100%;
+              height: 100%;
+          }
+    }
+    .template-index #MainContent .slideshow  .slider:not(flickity-enabled )  > .item:nth-child(2) {
+        opacity: 1 !important;
+        visibility: visible !important;
+        animation: none !important;
+    } */
+</style>

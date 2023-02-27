@@ -13,9 +13,17 @@
 {%- capture article_image -%}
   {%- if article.image -%}
     <a href="{{ article.url }}" title="{{ article.title }}" aria-label="{{ article.title }}"
-      class="post__image lazyload"
+      class="post__image lazyloaded desktop_view"
       {% if article.image %}
-      data-bgset="{% render 'bgset', image: article.image %}"
+      style="background-image:url('{{ article.image | img_url: '1512x' }}');"
+      data-sizes="auto"
+      data-parent-fit="cover"
+      {% endif %}>
+    </a>
+    <a href="{{ article.url }}" title="{{ article.title }}" aria-label="{{ article.title }}"
+      class="post__image lazyloaded mobile_view"
+      {% if article.image %}
+      style="background-image:url('{{ article.image | img_url: '540x' }}');"
       data-sizes="auto"
       data-parent-fit="cover"
       {% endif %}>

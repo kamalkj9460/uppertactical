@@ -25,8 +25,13 @@
     <a href="{{ article.url }}" class="blog__post-image-link">
       <div class="blog__post-overlay"></div>
 
-      <div class="blog__post-image lazyload"
-        data-bgset="{% render 'bgset', image: article_image %}"
+      <div class="blog__post-image lazyloaded desktop_view"
+        style="background-image:url('{{ article_image | img_url: '1512x' }};')"
+        data-sizes="auto"
+        data-parent-fit="cover">
+      </div>
+      <div class="blog__post-image lazyloaded mobile_view"
+        style="background-image:url('{{ article_image | img_url: '540x' }};')"
         data-sizes="auto"
         data-parent-fit="cover">
       </div>

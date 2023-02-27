@@ -27,9 +27,9 @@
 -%}
 
 {%- capture thumbnail_markup -%}
-  <img src="{{ 'blank.gif' | asset_img_url: '1x1' }}"
-    class="product-single__thumbnail-img lazyload"
-    data-src="{{ url_pattern }}"
+  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad"
+    class="product-single__thumbnail-img lazyloaded"
+    data-src="{{ thumbnail | img_url: '120x' }}"
     data-widths= "{{ widths }}"
     data-aspectratio="{{ thumbnail.aspect_ratio }}"
     data-sizes="auto"

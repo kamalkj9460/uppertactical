@@ -276,7 +276,7 @@
         {%- endif -%}
 
         <div class="tabs__contents" data-tabs-contents>
-          {{ tabs }}
+          {{ tabs | replace: '<iframe' , '<iframelazy data-class="LazyLoad"' | replace: '</iframe>' , '</iframelazy>' | replace: 'src="https://www.youtube.com' , 'data-src="https://www.youtube.com' }}
         </div>
       </div>
     {%- else -%}

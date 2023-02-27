@@ -49,19 +49,30 @@
   <div class="product__rating" data-product-rating role="img" aria-label="{{ rating_label }}" tabindex="{{ tabindex }}">
     {%- if single_star -%}
       <span class="rating__star" aria-hidden="true">
-        <span class="rating__star__full"><svg width="25px" height="25px" viewBox="0 0 25 25" class="icon icon-star icon-star--full"><polygon fill-rule="nonzero" points="16.2212909 8.77064179 12.5128412 0.870224269 8.80343056 8.77064179 0.512841234 10.0374085 6.51243703 16.1862739 5.09643337 24.8702243 12.5128412 20.7696377 19.9292491 24.8702243 18.5122845 16.1862739 24.5128412 10.0374085"></polygon></svg></span>
+        <span class="rating__star__full">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad" data-src="{{ 'rating__star__full.png' | asset_url }}" alt="">
+            {% comment %}
+            <svg width="25px" height="25px" viewBox="0 0 25 25" class="icon icon-star icon-star--full"><polygon fill-rule="nonzero" points="16.2212909 8.77064179 12.5128412 0.870224269 8.80343056 8.77064179 0.512841234 10.0374085 6.51243703 16.1862739 5.09643337 24.8702243 12.5128412 20.7696377 19.9292491 24.8702243 18.5122845 16.1862739 24.5128412 10.0374085"></polygon></svg>
+            {% endcomment %}
+        </span>
       </span>
       <span class="product__rating__value">{{ reviews_rating | round: 1 }}</span>
     {%- else -%}
       <span class="rating__star" aria-hidden="true" style="--percent: {{ 100 | minus: percent }}%">
         <span class="rating__star__empty">
           {%- for i in (1..5) -%}
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad" data-src="{{ 'rating__star__empty.png' | asset_url }}" alt="">
+            {% comment %}
             <svg width="25px" height="25px" viewBox="0 0 25 25" class="icon icon-star icon-star--empty"><polygon fill-rule="nonzero" points="16.2212909 8.77064179 12.5128412 0.870224269 8.80343056 8.77064179 0.512841234 10.0374085 6.51243703 16.1862739 5.09643337 24.8702243 12.5128412 20.7696377 19.9292491 24.8702243 18.5122845 16.1862739 24.5128412 10.0374085"></polygon></svg>
+            {% endcomment %}
           {%- endfor -%}
         </span>
         <span class="rating__star__full">
           {%- for i in (1..5) -%}
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad" data-src="{{ 'rating__star__full.png' | asset_url }}" alt="">
+            {% comment %}
             <svg width="25px" height="25px" viewBox="0 0 25 25" class="icon icon-star icon-star--full"><polygon fill-rule="nonzero" points="16.2212909 8.77064179 12.5128412 0.870224269 8.80343056 8.77064179 0.512841234 10.0374085 6.51243703 16.1862739 5.09643337 24.8702243 12.5128412 20.7696377 19.9292491 24.8702243 18.5122845 16.1862739 24.5128412 10.0374085"></polygon></svg>
+            {% endcomment %}
           {%- endfor -%}
         </span>
       </span>

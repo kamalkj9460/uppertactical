@@ -110,9 +110,9 @@
             data-product-single-media-wrapper>
             <div class="product-single__media product-single__media--image">
               <div class="product-single__media--image-height" style="padding-top: {{ media_padding_top }}%;"></div>
-              <img class="lazyload"
-                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                data-src="{{ image_url_pattern }}"
+              <img class="lazyloaded"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad"
+                data-srcset="{{ product.featured_image | img_url: '1728x' }} 1536w,{{ product.featured_image | img_url: '1296x' }} 1280w,{{ product.featured_image | img_url: '900x' }} 768w,{{ product.featured_image | img_url: '540x'}} 320w"
                 data-widths= "{{ image_widths }}"
                 data-aspectratio="{{ media_aspect_ratio }}"
                 data-sizes="auto"
@@ -222,7 +222,7 @@
                     <div class="product__accordion__content" id="ProductAccordion--{{ section.id }}-{{ block.id }}" data-collapsible-container>
                       <div class="product__accordion__inner" data-collapsible-content>
                         <div class="product__reviews">
-                          {{ app_code }}
+                          {{ app_code | replace : '<script type="application/javascript">' , '<script type="lazyload_int" data-w3-type="application/javascript">' }}
                         </div>
                       </div>
                     </div>
@@ -230,7 +230,7 @@
                 </div>
               {%- else -%}
                 <div class="product__block standard__app" {{ animations_attributes }} {{ block.shopify_attributes }}>
-                  {{ app_code }}
+                  {{ app_code | replace : '<script type="application/javascript">' , '<script type="lazyload_int" data-w3-type="application/javascript">' }}
                 </div>
               {%- endif -%}
 
@@ -1199,7 +1199,7 @@
                 {{ block_style }}
                 {{ block.shopify_attributes }}>
                 {%- unless product == blank -%}
-                  {{- product.description -}}
+                  {{- product.description | replace: '<iframe' , '<iframelazy data-class="LazyLoad"' | replace: '</iframe>' , '</iframelazy>' | replace: 'src="https://www.youtube.com' , 'data-src="https://www.youtube.com' -}}
                 {%- else -%}
                   <p>{{ 'homepage.onboarding.single_product_description' | t }}</p>
                 {%- endunless -%}
@@ -1367,9 +1367,9 @@
                       {%- if icon_image != blank -%}
                         <div class="product__icon__holder">
                           <img
-                            class="product__icon__img lazyload"
-                            src="{{ 'blank.gif' | asset_img_url: '1x1' }}"
-                            data-src="{{ image_url_pattern }}"
+                            class="product__icon__img lazyloaded"
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad"
+                            data-src="{{ icon_image | img_url: icon_width }}"
                             data-widths= "{{ image_widths }}"
                             data-aspectratio="{{ icon_image.aspect_ratio }}"
                             data-sizes="auto"

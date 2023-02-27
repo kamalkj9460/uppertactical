@@ -118,9 +118,9 @@
       {%- assign logo_padding_top = 1 | divided_by: image.aspect_ratio | times: 100 | round: 1 -%}
 
       <img
-        class="lazyload logo__image"
-        src="{{ 'blank.gif' | asset_img_url: '1x1' }}"
-        data-src="{{ image_url_pattern }}"
+        class="lazyloaded logo__image"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad"
+        data-src="{{ image | img_url: '160x' }}"
         data-widths= "{{ image_widths }}"
         data-aspectratio="{{ image.aspect_ratio }}"
         data-sizes="auto"
@@ -145,9 +145,9 @@
       {%- assign logo_padding_top = 1 | divided_by: image.aspect_ratio | times: 100 | round: 1 -%}
 
       <img
-        class="lazyload logo__image"
-        src="{{ 'blank.gif' | asset_img_url: '1x1' }}"
-        data-src="{{ image_url_pattern }}"
+        class="lazyloaded logo__image"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad"
+        data-src="{{ image | img_url: '160x' }}"
         data-widths= "{{ image_widths }}"
         data-aspectratio="{{ image.aspect_ratio }}"
         data-sizes="auto"

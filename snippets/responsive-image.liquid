@@ -36,9 +36,9 @@
   <div class="responsive-image{% if container_class != blank %} {{ container_class }}{% endif %}"
     style="padding-top: {{ aspect_ratio | times: 100 | round: 2 }}%"
     {{ container_attributes }}>
-    <img class="{{ image_class }} lazyload"
-      src="{{ 'blank.gif' | asset_img_url: '1x1' }}"
-      data-src="{{ image_url_pattern }}"
+    <img class="{{ image_class }} lazyloaded"
+      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad"
+      data-srcset="{{ image | img_url: '1512x' }} 1536w,{{ image | img_url: '1296x' }} 1280w,{{ image | img_url: '720x' }} 768w,{{ image | img_url: '540x'}} 320w"
       data-widths="{{ image_widths }}"
       data-aspectratio="{{ image_aspect_ratio }}"
       data-sizes="auto"

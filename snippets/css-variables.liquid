@@ -223,7 +223,7 @@
 
 {%- style -%}
 
-{%- comment -%} Typography {%- endcomment -%}
+{%- comment -%} Typography 
 {{ heading_font | font_face: font_display: 'swap' }}
 {{ base_font | font_face: font_display: 'swap' }}
 
@@ -254,7 +254,8 @@
 {% if base_font_bold_italic %}
   {{ base_font_bold_italic | font_face: font_display: 'swap' }}
 {% endif %}
-
+{%- endcomment -%}
+  
 {%- comment -%} CSS variables defined in Theme settings {%- endcomment -%}
 :root {
   {%- comment -%} Global colors {%- endcomment -%}

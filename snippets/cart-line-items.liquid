@@ -38,9 +38,8 @@
             assign image_widths = "[90,160,180,270,320]"
           -%}
           <img
-            class="lazyload"
-            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-            data-src="{{ image_url_pattern }}"
+            class="lazyloaded"
+            src="{{ image | img_url: '360x' }}"
             data-aspectratio="{{ image.aspect_ratio | default: 1 }}"
             data-widths= "{{ image_widths }}"
             data-sizes="auto"

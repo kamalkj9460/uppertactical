@@ -1,0 +1,80 @@
+@font-face {
+  font-family: "Harmonia Sans";
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://fonts.shopifycdn.com/harmonia_sans/harmoniasans_n6.dd3d6084d29e4754e80fe6aa1c0e37f511474ffa.woff2?h1=dXBwZXJjdXR0YWN0aWNhbC5jb20&h2=dXBwZXJjdXQtdGFjdGljYWwuYWNjb3VudC5teXNob3BpZnkuY29t&hmac=f320bd2777a54fc6491acb1362201e494cc8cc501e84946b1f5ac60fad6ddc54") format("woff2"),
+       url("https://fonts.shopifycdn.com/harmonia_sans/harmoniasans_n6.b0d6879084373b473d0c7a4c3d54ece9c289cbb4.woff?h1=dXBwZXJjdXR0YWN0aWNhbC5jb20&h2=dXBwZXJjdXQtdGFjdGljYWwuYWNjb3VudC5teXNob3BpZnkuY29t&hmac=71a100c31173f98829ccd65a7f3b3bb5b590348430ebfd692871164c3a9745fb") format("woff");
+}
+
+@font-face {
+  font-family: Chivo;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://fonts.shopifycdn.com/chivo/chivo_n4.bf4dc1c0e4649d2f5a28281870307415c2a9c652.woff2?h1=dXBwZXJjdXR0YWN0aWNhbC5jb20&h2=dXBwZXJjdXQtdGFjdGljYWwuYWNjb3VudC5teXNob3BpZnkuY29t&hmac=49c8d500e70d60ece5cdacdcd3621f5da2c9a4edb7f8b5ce034e3f1b0a9cbd8d") format("woff2"),
+       url("https://fonts.shopifycdn.com/chivo/chivo_n4.c44f905e08fb3fb913ad750486da37926e77c01e.woff?h1=dXBwZXJjdXR0YWN0aWNhbC5jb20&h2=dXBwZXJjdXQtdGFjdGljYWwuYWNjb3VudC5teXNob3BpZnkuY29t&hmac=dc8e094b86db047b7700b1508e013e1de1a31f8723e881d2da1899055ab886be") format("woff");
+}
+
+  @font-face {
+  font-family: "Harmonia Sans";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://fonts.shopifycdn.com/harmonia_sans/harmoniasans_n7.db6a243cdeddb2eba0b2e8fccdce1e6910fd06d0.woff2?h1=dXBwZXJjdXR0YWN0aWNhbC5jb20&h2=dXBwZXJjdXQtdGFjdGljYWwuYWNjb3VudC5teXNob3BpZnkuY29t&hmac=43a7916a41f76ef8f4aa88dc6e1862bb19178b05f06a7d2a17ef82090c4ea10d") format("woff2"),
+       url("https://fonts.shopifycdn.com/harmonia_sans/harmoniasans_n7.a069bd4d0320d5bc303f7f96d7bf28abc297b6aa.woff?h1=dXBwZXJjdXR0YWN0aWNhbC5jb20&h2=dXBwZXJjdXQtdGFjdGljYWwuYWNjb3VudC5teXNob3BpZnkuY29t&hmac=e8b29bf1f35931214c025db637c411f431cdf58722cafcc6c798d21b5a4f8398") format("woff");
+}
+
+  @font-face {
+  font-family: "Harmonia Sans";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://fonts.shopifycdn.com/harmonia_sans/harmoniasans_n4.73cf0589f7839ec88463a09f5335a2885467ed0c.woff2?h1=dXBwZXJjdXR0YWN0aWNhbC5jb20&h2=dXBwZXJjdXQtdGFjdGljYWwuYWNjb3VudC5teXNob3BpZnkuY29t&hmac=7f947a95e374b839a60aa132371dfb1af969dd5b5d4159370b9494c9b2fe105d") format("woff2"),
+       url("https://fonts.shopifycdn.com/harmonia_sans/harmoniasans_n4.1c5276ef69780b63aa8f0ba7897fb3bc87270bb0.woff?h1=dXBwZXJjdXR0YWN0aWNhbC5jb20&h2=dXBwZXJjdXQtdGFjdGljYWwuYWNjb3VudC5teXNob3BpZnkuY29t&hmac=7a95dfb1a16285ccce0e0a06832a4bf2e00ba72fa6963092d9d702b70b34415b") format("woff");
+}
+
+  @font-face {
+  font-family: "Harmonia Sans";
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://fonts.shopifycdn.com/harmonia_sans/harmoniasans_n9.4646a262fe85cf96a93b88311b95c5c5f4588d22.woff2?h1=dXBwZXJjdXR0YWN0aWNhbC5jb20&h2=dXBwZXJjdXQtdGFjdGljYWwuYWNjb3VudC5teXNob3BpZnkuY29t&hmac=543f7199bdff1327874d21378540ce4918754a1159996da39b4944ccd122b575") format("woff2"),
+       url("https://fonts.shopifycdn.com/harmonia_sans/harmoniasans_n9.dabdbffb658ce2e247bb0a0b879ca4314101c8bc.woff?h1=dXBwZXJjdXR0YWN0aWNhbC5jb20&h2=dXBwZXJjdXQtdGFjdGljYWwuYWNjb3VudC5teXNob3BpZnkuY29t&hmac=02109ef2401b6985e87f707902968c6fba151bec8253c04c89a83db3008902f5") format("woff");
+}
+
+  @font-face {
+  font-family: Chivo;
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://fonts.shopifycdn.com/chivo/chivo_n3.5a4af59837ac5ab11add0e1b1e824ac9635aac4a.woff2?h1=dXBwZXJjdXR0YWN0aWNhbC5jb20&h2=dXBwZXJjdXQtdGFjdGljYWwuYWNjb3VudC5teXNob3BpZnkuY29t&hmac=27420015e4ef086601cef11ed4d06af12731645fde50a65ab99265628852d4ba") format("woff2"),
+       url("https://fonts.shopifycdn.com/chivo/chivo_n3.162c793857fc10d94c8104e19bc6fb3587a027e6.woff?h1=dXBwZXJjdXR0YWN0aWNhbC5jb20&h2=dXBwZXJjdXQtdGFjdGljYWwuYWNjb3VudC5teXNob3BpZnkuY29t&hmac=dd70948c878a36bdfd06fd3216e1e09502b65f10d497ee102f9c922c4c04f1d9") format("woff");
+}
+
+  @font-face {
+  font-family: Chivo;
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://fonts.shopifycdn.com/chivo/chivo_n7.d83b4aaa520af8b24ea0f1eb81a6d2d8b1a2ad49.woff2?h1=dXBwZXJjdXR0YWN0aWNhbC5jb20&h2=dXBwZXJjdXQtdGFjdGljYWwuYWNjb3VudC5teXNob3BpZnkuY29t&hmac=af71708f017d772885110435a8342e28d4ab0857538fbc23a9ef9fe74c89f037") format("woff2"),
+       url("https://fonts.shopifycdn.com/chivo/chivo_n7.ca33be8a8668a1a14638e19419769677d3ae8d49.woff?h1=dXBwZXJjdXR0YWN0aWNhbC5jb20&h2=dXBwZXJjdXQtdGFjdGljYWwuYWNjb3VudC5teXNob3BpZnkuY29t&hmac=05149b2410069150985938f584f4a527357541e5565350774fac179ed758e162") format("woff");
+}
+
+  @font-face {
+  font-family: Chivo;
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url("https://fonts.shopifycdn.com/chivo/chivo_i4.470484818143ea189f363c3f40b1b964b6f9b99a.woff2?h1=dXBwZXJjdXR0YWN0aWNhbC5jb20&h2=dXBwZXJjdXQtdGFjdGljYWwuYWNjb3VudC5teXNob3BpZnkuY29t&hmac=e180282557b3eae5462d60f0e9e4160c71fb8cdab81330e12f6cdf7ea93bea6c") format("woff2"),
+       url("https://fonts.shopifycdn.com/chivo/chivo_i4.200ce5592d4f6e30c5616533857fb75f86392d06.woff?h1=dXBwZXJjdXR0YWN0aWNhbC5jb20&h2=dXBwZXJjdXQtdGFjdGljYWwuYWNjb3VudC5teXNob3BpZnkuY29t&hmac=f33d42fc19e5e5c20a1aa13803d047031aa4279e477b5ecdf0299be13267026a") format("woff");
+}
+
+  @font-face {
+  font-family: Chivo;
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+  src: url("https://fonts.shopifycdn.com/chivo/chivo_i7.29b3e3bf6a0a27a521a72b1c0827afe238bbc3c2.woff2?h1=dXBwZXJjdXR0YWN0aWNhbC5jb20&h2=dXBwZXJjdXQtdGFjdGljYWwuYWNjb3VudC5teXNob3BpZnkuY29t&hmac=488d18a6b80d1afc14f66d977121a298e91f2ebe4eb1f260993a5173629b61bd") format("woff2"),
+       url("https://fonts.shopifycdn.com/chivo/chivo_i7.a5526f7fe5855e716c95dfc91ed717abaf648aae.woff?h1=dXBwZXJjdXR0YWN0aWNhbC5jb20&h2=dXBwZXJjdXQtdGFjdGljYWwuYWNjb3VudC5teXNob3BpZnkuY29t&hmac=3e5fbd2a2e92818e89186b6439dd28d368c2d694ab322dd157fad8d46b759e78") format("woff");
+}

@@ -65,6 +65,8 @@
             height="{{- retina_size | divided_by: image.aspect_ratio | round -}}"
             loading="lazy">
         {%- else -%}
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad" data-src="{{ 'circle-text.png' | asset_url }}" alt="">
+          {% comment %}
           <svg viewBox="0 0 100 100">
             <defs>
               <path id="circle-text-{{- unique_id -}}" d="
@@ -80,6 +82,7 @@
               </textPath>
             </text>
           </svg>
+          {% endcomment %}
         {%- endif -%}
       </div>
     </div>
