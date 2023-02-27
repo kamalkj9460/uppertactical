@@ -1,0 +1,320 @@
+{% comment %} /sections/background-video.liquid {% endcomment %}
+
+{%- liquid
+  assign unique = section.id
+  assign video_id = section.settings.video_link.id
+  assign video_enable_sound = section.settings.video_enable_sound
+  assign section_height = section.settings.video_height
+  assign title = section.settings.title
+  assign heading_highlight_type = section.settings.heading_highlight_type
+  assign heading_size = section.settings.heading_size | times: 0.01
+  assign text = section.settings.text
+  assign text_color = section.settings.text_color
+  assign image = section.settings.image
+  assign button_text = section.settings.button_text
+  assign button_link = section.settings.button_link | default: '#'
+  assign button_style = section.settings.button_style
+  assign text_position = section.settings.text_position
+  assign show_text_shadow = settings.show_text_shadow
+  assign overlay_opacity = section.settings.overlay_opacity | times: 0.01
+  assign animations_enabled = settings.animations_enabled
+  assign animation_anchor = '#FeaturedVideo--' | append: section.id
+  assign animation_delay = 150
+  assign video_link = section.settings.video_link
+  assign background_video = section.settings.video_link_bg
+-%}
+
+{% comment %}
+  Enhanced text decorations options - Liqiud variables
+
+  Dependencies:
+    - Title liquid object from settings: `assign title = section.settings.title`
+    - Highlight type from settings: `assign heading_highlight_type = section.settings.heading_highlight_type`
+    - Accent color from global settings: `settings.color_accent`
+    - SVG icons:
+      - icon-squiggle.svg (assets)
+      - icon-circle.liquid (snippet)
+{% endcomment %}
+
+{%- liquid
+  assign icon_url = ''
+  assign icon_color = settings.color_accent
+
+  capture text_highlight_icon
+    assign has_text_highlight = false
+
+    if title contains '<em>'
+      case heading_highlight_type
+        when 'squiggle'
+          assign icon_url = 'icon-squiggle.svg' | asset_url
+          echo '<span class="text-highlight__icon"></span>'
+        when 'circle'
+          echo '<span class="text-highlight__icon">'
+          render 'icon-circle', color: settings.color_accent
+          echo '</span>'
+        when 'stroke' or 'circle' or 'squiggle'
+          assign has_text_highlight = true
+      endcase
+    endif
+  endcapture
+
+  capture icon_bg
+    if icon_url != ''
+      echo 'url( "' | append: icon_url | append: '" )'
+    else
+      echo 'none'
+    endif
+  endcapture
+  capture icon_styles
+    assign icon_bg = icon_bg | replace: '"', "'"
+    echo 'style="--icon-url: ' | append: icon_bg | append: ';' | append: '--icon-color: ' | append: icon_color | append: ';"'
+  endcapture
+  
+  assign text_highlight_wrapper_class = 'text-highlight-wrapper' | append: ' text-highlight-wrapper--' | append: heading_highlight_type
+  capture text_highlight_start
+    echo '<span class="text-highlight" ' | append: icon_styles | append: '>'
+  endcapture
+  capture text_highlight_end
+    echo text_highlight_icon
+    echo '</span>'
+  endcapture
+
+  if title != blank and title contains '<em>'
+    case heading_highlight_type
+      when 'squiggle' or 'circle' or 'stroke'
+        assign title = title | replace: '<em>', text_highlight_start | replace: '</em>', text_highlight_end
+    endcase
+  endif
+-%}
+
+{%- style -%}
+  #FeaturedVideo--{{ section.id }} { --overlay-opacity: {{ overlay_opacity }}; }
+  #FeaturedVideo--{{ section.id }} .main-heading { --adjust-heading: calc(var(--FONT-ADJUST-HEADING) * {{ heading_size }}); }
+{%- endstyle -%}
+
+<section id="FeaturedVideo--{{ unique }}"
+  class="featured-video-section {{ section_height }}"
+  data-section-id="FeaturedVideo--video-{{ unique }}"
+  data-section-type="featured-video">
+  <div class="video-wrapper">
+    {%- render 'video',
+      unique: unique,
+      text_color: text_color,
+      overlay_opacity: overlay_opacity,
+      title: title,
+      heading_highlight_type: heading_highlight_type,
+      has_text_highlight: has_text_highlight,
+      text_highlight_wrapper_class: text_highlight_wrapper_class,
+      heading_size: heading_size,
+      text: text,
+      image: image,
+      button_text: button_text,
+      button_link: button_link,
+      button_style: button_style,
+      text_position: text_position,
+      show_text_shadow: show_text_shadow,
+      animations_enabled: animations_enabled,
+      animation_anchor: animation_anchor,
+      animation_delay: animation_delay,
+      background_video: background_video,
+      video_id: video_id,
+      video_link: video_link
+    -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Video",
+  "class": "featured-video-section transparent-header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "video_height",
+      "label": "Height",
+      "default": "six-fifty-height",
+      "options": [
+        { "value": "full-height", "label": "Full screen" },
+        { "value": "seven-fifty-height", "label": "750px" },
+        { "value": "six-fifty-height", "label": "650px" },
+        { "value": "five-fifty-height ", "label": "550px" },
+        { "value": "four-fifty-height", "label": "450px" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Content alignment",
+      "default": "middle-center",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "Top left"
+        },
+        {
+          "value": "top-center",
+          "label": "Top center"
+        },
+        {
+          "value": "top-right",
+          "label": "Top right"
+        },
+        {
+          "value": "middle-center",
+          "label": "Center"
+        },
+        {
+          "value": "bottom-left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottom-center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "bottom-right",
+          "label": "Bottom right"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Video"
+    },
+    {
+      "type": "text",
+      "id": "video_link_bg",
+      "label": "Video background link",
+      "info": "MP4 video link from [files](/admin/settings/files?media_type=VIDEO)"
+    },
+    {
+      "type": "text",
+      "id": "video_link",
+      "label": "Video popup link",
+      "info": "Video links from YouTube, Vimeo or MP4 video link from [files](/admin/settings/files?media_type=VIDEO)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Displays while video is loading"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Text contrast",
+      "info": "Improves readability of text",
+      "min": 0,
+      "max": 95,
+      "step": 5,
+      "unit": "%",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "select",
+      "id": "text_color",
+      "label": "Color",
+      "default": "text-light",
+      "options": [
+        {
+          "value": "text-light",
+          "label": "Light"
+        },
+        {
+          "value": "text-dark",
+          "label": "Dark"
+        }
+      ]
+    },
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "Heading",
+      "default": "<p>Welcome to Palo Alto</p>",
+      "info": "Highlight one or two key words in your heading by italicizing them, then choose the highlight option below"
+    },
+    {
+      "type": "select",
+      "id": "heading_highlight_type",
+      "label": "Highlight type",
+      "default": "italics",
+      "options": [
+        {
+          "value": "italics",
+          "label": "Italics (no decoration)"
+        },
+        {
+          "value": "squiggle",
+          "label": "Squiggle"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "stroke",
+          "label": "Stroke (outlined text)"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "This text helps you provide some more detail to the title above."
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "default": 100,
+      "min": 100,
+      "max": 200,
+      "step": 10,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Text",
+      "default": "Welcome"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Style",
+      "default": "btn--secondary btn--small",
+      "options": [
+        { "label": "Text", "value": "btn--text" },
+        { "label": "Small button", "value": "btn--primary btn--small" },
+        { "label": "Large button", "value": "btn--primary" },
+        { "label": "Small secondary button", "value": "btn--secondary btn--small" },
+        { "label": "Large secondary button", "value": "btn--secondary" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

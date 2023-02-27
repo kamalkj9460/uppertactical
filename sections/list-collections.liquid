@@ -1,0 +1,191 @@
+{%- render 'list-collections' -%}
+
+{% schema %}
+  {
+    "name": "Collection list",
+    "class": "collection-list",
+    "max_blocks": 12,
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "All collections will be shown if no blocks added"
+      },
+      {
+        "type": "header",
+        "content": "Layout"
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "label": "Layout",
+        "default": "carousel",
+        "options": [
+          { "value": "grid", "label": "Grid" },
+          { "value": "carousel", "label": "Carousel" }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "columns",
+        "label": "Collections per row",
+        "default": 3,
+        "min": 2,
+        "max": 4,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "height",
+        "label": "Height",
+        "min": 25,
+        "max": 150,
+        "step": 5,
+        "unit": "%",
+        "default": 80
+      },
+      {
+        "type": "range",
+        "id": "text_size",
+        "label": "Text size",
+        "default": 100,
+        "min": 75,
+        "max": 150,
+        "step": 5,
+        "unit": "%"
+      },
+      {
+        "type": "header",
+        "content": "Text"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Collections"
+      },
+      {
+        "type": "header",
+        "content": "Button"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Text",
+        "default": "Shop All"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_btn_mobile",
+        "label": "Show \"Shop All\" button",
+        "default": false,
+        "info": "Only on mobile"
+      },
+      {
+        "type": "select",
+        "id": "button_style",
+        "label": "Style",
+        "default": "btn--secondary btn--small",
+        "options": [
+          { "label": "Text", "value": "btn--text" },
+          { "label": "Small button", "value": "btn--primary btn--small" },
+          { "label": "Large button", "value": "btn--primary" },
+          { "label": "Small secondary button", "value": "btn--secondary btn--small" },
+          { "label": "Large secondary button", "value": "btn--secondary" }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Colors"
+      },
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background"
+      },
+      {
+        "type": "select",
+        "id": "text_color",
+        "label": "Text",
+        "default": "text-light",
+        "options": [
+          { "value": "text-light", "label": "Light" },
+          { "value": "text-dark", "label": "Dark" }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "overlay_opacity",
+        "label": "Text contrast",
+        "info": "Improves readability of text",
+        "min": 0,
+        "max": 95,
+        "step": 5,
+        "unit": "%",
+        "default": 10
+      },
+      {
+        "type": "header",
+        "content": "Mobile layout"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_slider_mobile",
+        "label": "Enable slider",
+        "default": true,
+        "info": "Horizontal slider in mobile layout."
+      },
+      {
+        "type": "header",
+        "content": "Section spacing"
+      },
+      {
+        "type": "select",
+        "id": "width",
+        "label": "Width",
+        "default": "wrapper--full-padded",
+        "options": [
+          { "value": "wrapper--full-padded", "label": "Full width padded" },
+          { "value": "wrapper", "label": "Page width" }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding top",
+        "default": 60
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding bottom",
+        "default": 60
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "label": "Collection",
+            "id": "collection",
+            "type": "collection"
+          },
+          {
+            "type": "image_picker",
+            "id": "custom_collection_image",
+            "label": "Image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

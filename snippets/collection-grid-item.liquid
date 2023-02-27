@@ -1,0 +1,182 @@
+{%- comment -%}
+  Renders list of collections in grid layout
+
+  Accepts:
+  - collection: {Object} collection (required)
+  - item_width: {String} Set item width's class
+  - item_width_mobile: {String} Set item width's class on mobile
+  - custom_collection_image: {Object} Replace collection's image
+  - custom_bg_color: {String} Set a background color
+  - show_bg_color: {Boolean} Override the collection image with a background color
+  - animation_delay: {Number} Factor based on grid items per row
+  - animation_anchor: {String} Link the animation to an ID
+  - carousel: {Boolean} Show the collections in carousel. Default: true
+  - image_shape: {String} Add custom image shape: circle, square or a rectangle
+  - block_shopify_attributes: {Object} Shopify attributes for block
+  - placeholder_index: {Integer} Alternating placeholder images
+  - text_over_image: {Boolean} Show text over images
+  - text_color: {String} Add custom text color
+  - unique: {String} Section or Block id
+  - show_btn_mobile: {Boolean} Show "Shop All" button on mobile. Default: false
+
+  Usage:
+  {%- render 'collection-grid-item', collection: collection, item_width: item_width, item_width_mobile: item_width_mobile, custom_collection_image: custom_collection_image, custom_bg_color: custom_bg_color, show_bg_color: show_bg_color, animation_delay: animation_delay, animation_anchor: animation_anchor, carousel: carousel, image_shape: image_shape, block_shopify_attributes: block.shopify_attributes, placeholder_index: placeholder_index, text_over_image: text_over_image, text_color: text_color, unique: unique, show_btn_mobile: show_btn_mobile -%}
+
+  Example:
+  {%- render 'collection-grid-item', collection: collections[block.settings.collection], item_width: 'one-sixth', item_width_mobile: 'mobile--one-half', custom_collection_image: block.settings.custom_collection_image, unique: block.id, show_btn_mobile: true -%}
+{%- endcomment -%}
+
+{%- liquid
+  assign button_text = section.settings.button_text
+
+  if custom_collection_image
+    assign image = custom_collection_image
+  elsif collection.image
+    assign image = collection.image
+  elsif collection.products.first and collection.products.first.featured_media.preview_image
+    assign image = collection.products.first.featured_media.preview_image
+  endif
+
+  if collection.title == blank
+    assign collection_title = 'homepage.onboarding.collection_title' | t
+    assign collection_url = '#!'
+  else
+    assign collection_title = collection.title | strip_html | escape | truncatewords: 10
+    assign collection_url = collection.url
+  endif
+
+  assign animations_enabled = settings.animations_enabled
+
+  capture item_class
+    echo 'list-collections__item'
+
+    if image_shape
+      echo ' list-collections__item--' | append: image_shape
+    endif
+
+    if text_over_image
+      echo ' list-collections__item--over-image'
+    endif
+
+    if collection == empty
+      echo ' list-collections__item--onboarding'
+    endif
+
+    if carousel
+      echo ' carousel__item'
+    else
+      echo ' grid__item'
+    endif
+
+    echo ' ' | append: item_width
+    echo ' ' | append: item_width_mobile
+    echo ' ' | append: text_color
+  endcapture
+
+  capture item_bg_class
+    echo 'list-collections__item__image-bg'
+
+    unless show_bg_color
+      if image != blank
+        echo ' lazyload'
+      else
+        echo ' placeholder-svg--overlayed'
+      endif
+    endunless
+  endcapture
+-%}
+
+{%- if show_bg_color -%}
+  {%- style -%}
+    #list-collections__item--{{ unique }} .list-collections__item__image-bg { background: {{ custom_bg_color }}; }
+    #list-collections__item--{{ unique }} .list-collections__item__image-bg:before { content: none; }
+  {%- endstyle -%}
+{%- endif -%}
+
+<div class="{{ item_class }}"
+  id="list-collections__item--{{ unique }}"
+  {% if carousel %}
+    data-slide
+  {% endif %}
+  {% if block_shopify_attributes %}
+    {{ block_shopify_attributes }}
+  {% endif %}>
+
+  <div class="list-collections__item__outer">
+    <a href="{{ collection_url }}" class="list-collections__item__image"
+      data-product-media-container
+      {% if animations_enabled %}
+        data-aos="fade-up"
+        data-aos-anchor="{{ animation_anchor }}"
+        data-aos-delay="{{ animation_delay | times: 150 }}"
+      {% endif %}>
+      <div class="{{ item_bg_class }}"
+        {% if image != blank and show_bg_color != true %}
+          data-bgset="{% render 'bgset', image: image %}"
+          data-aspectratio="{{ image.aspect_ratio }}"
+          data-sizes="auto"
+        {% endif %}
+        >
+        {%- unless show_bg_color -%}
+          {%- if collection != empty and image == blank -%}
+            {%- assign image_url_pattern = collection.products.first.featured_image | img_url: '1024x' | replace: '_1024x.', '_{width}x.' -%}
+            {%- assign image_widths = "[180, 360, 540, 720, 960, 1024, 1280]" -%}
+            <img
+              class="no-image-placeholder lazyload"
+              src="{{ 'blank.gif' | asset_img_url: '1x1' }}"
+              data-src="{{ image_url_pattern }}"
+              data-widths= "{{ image_widths }}"
+              data-aspectratio="1"
+              data-sizes="auto"
+              width="1024"
+              height="1024"
+              alt="{{ collection.title | strip_html | escape }}">
+            <noscript>
+              <img
+                class="no-image-placeholder"
+                src="{{ image | img_url: '1024x' }}"
+                width="1024"
+                height="1024"
+                alt="{{ collection.title | strip_html | escape }}">
+            </noscript>
+          {%- elsif image == blank -%}
+            {{- 'collection-' | append: placeholder_index | placeholder_svg_tag: 'placeholder-svg-filled' -}}
+          {%- elsif image != blank -%}
+            <noscript>
+              <img
+                class="no-image-placeholder"
+                src="{{ image | img_url: '1024x' }}"
+                width="1024"
+                height="1024"
+                alt="{{ collection.title | strip_html | escape }}">
+            </noscript>
+          {%- endif -%}
+        {%- endunless -%}
+      </div>
+
+      {%- if image != blank and show_bg_color == false -%}
+        <noscript>
+          <div class="list-collections__item__image-bg" style="background-image: url( {{ image | img_url: '2048x' }} );"></div>
+        </noscript>
+      {%- endif -%}
+    </a>
+
+    <a href="{{ collection_url }}"
+      class="list-collections__item__content list-collections__item__content--{% if text_over_image %}overlayed{% else %}under{% endif %}"
+      {% if animations_enabled %}
+        data-aos="fade-up"
+        data-aos-anchor="{{ animation_anchor }}"
+        data-aos-delay="{{ animation_delay | times: 150 }}"
+      {% endif %}>
+      <h3 class="list-collections__item__title">
+        {{- collection_title -}}
+      </h3>
+
+      {%- unless button_text == blank -%}
+        <div class="list-collections__item__btn-wrapper{% if show_btn_mobile %} list-collections__item__btn-wrapper--mobile{% endif %}">
+          <span class="btn {{ section.settings.button_style }}">{{ button_text }}</span>
+        </div>
+      {%- endunless -%}
+    </a>
+  </div>
+</div>

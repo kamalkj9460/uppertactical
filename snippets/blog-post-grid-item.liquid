@@ -1,0 +1,93 @@
+{%- comment -%}
+    Renders blog post item in a grid
+
+    Accepts:
+    - article: {Object} article (required)
+    - animations_enabled: {Boolean} Enable the on scroll animations
+    - animation_delay: {Number} Factor based on grid items per row
+    - animation_anchor: {String} Hook for the AOS animation
+    - default_color: {Color} Applies if the blog has no image set
+    - default_image: {Object} Applies if the blog has no featured image
+
+    Usage:
+    {% render 'blog-post-grid-item', article: article, animation_delay: animation_delay, animation_anchor: animation_anchor, default_color: default_color, default_image: default_image  %}
+{%- endcomment -%}
+
+{%- assign article_image = article.image | default: default_image -%}
+
+<div class="blog__post-item"
+  {% if animations_enabled %}
+    data-aos="fade-up"
+    data-aos-anchor="{{ animation_anchor }}"
+    data-aos-delay="{{ animation_delay }}"
+  {% endif %}>
+  {%- if article_image -%}
+    <a href="{{ article.url }}" class="blog__post-image-link">
+      <div class="blog__post-overlay"></div>
+
+      <div class="blog__post-image lazyload"
+        data-bgset="{% render 'bgset', image: article_image %}"
+        data-sizes="auto"
+        data-parent-fit="cover">
+      </div>
+      <noscript>
+        <div class="blog__post-image" style="background-image:url('{{ article_image | img_url: '2048x' }};')"></div>
+      </noscript>
+    </a>
+  {%- else -%}
+    <a href="{{ article.url }}" class="blog__post-image-link">
+      <div class="blog__post-overlay"></div>
+      <div class="blog__post-image {{ default_color }}"></div>
+    </a>
+  {%- endif -%}
+
+  <div class="blog__post-content">
+    {%- if article.tags.size > 0 and section.settings.show_tags -%}
+      <div class="blog__post-tags">
+        {%- for tag in article.tags -%}
+          {%- unless tag contains 'time_' -%}
+            <a class="blog__post-tags-link" href="{{ blog.url }}/tagged/{{ tag | handle }}"><small>{{ tag | capitalize }}</small></a>
+          {% endunless %}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <h3 class="blog__post-title"><a class="blog__post-title-link" href="{{ article.url }}">{{ article.title }}</a></h3>
+
+    {%- if section.settings.show_author or section.settings.show_date -%}
+      <p class="blog__post-meta">
+        {%- capture author -%}{{ article.author }}{%- endcapture -%}
+        {%- capture date -%}<time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time>{%- endcapture -%}
+
+        {%- if section.settings.show_author -%}
+          <small>{{ 'blogs.article.by_author' | t: author: author }}</small>
+        {%- endif -%}
+        {%- if section.settings.show_date -%}
+          <small>{{ date }}</small>
+        {%- endif -%}
+      </p>
+    {%- endif -%}
+
+    <a class="blog__post-excerpt-link" href="{{ article.url }}">
+      <div class="rte">
+        {%- if article.excerpt.size > 0 -%}
+          {{- article.excerpt -}}
+        {%- else -%}
+          <p class="blog__post-excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 35 }}</p>
+        {%- endif -%}
+      </div>
+    </a>
+
+    {%- if blog.comments_enabled? and article.comments_count > 0 or article.tags.size > 0 -%}
+      <ul class="blog__post-comments inline-list">
+        {%- if blog.comments_enabled? and article.comments_count > 0 -%}
+          <li>
+            <a href="{{ article.url }}#Comments" class="blog__comments-link">
+              <small>{{ 'blogs.comments.comments_with_count' | t: count: article.comments_count }}</small>
+            </a>
+          </li>
+        {%- endif -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</div>

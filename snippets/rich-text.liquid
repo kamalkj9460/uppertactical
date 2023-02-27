@@ -1,0 +1,267 @@
+{%- liquid
+  assign animations_enabled = settings.animations_enabled
+  assign animation_delay = 150
+-%}
+
+{%- capture content -%}
+  {%- if top_image != blank -%}
+    <div class="rich-text__top-image"
+      {% if animations_enabled %}
+        data-aos="fade-up"
+        data-aos-anchor="{{ animation_anchor }}"
+        data-aos-delay="{{ animation_delay }}"
+      {% endif %}>
+      {%- liquid
+        assign image_url_pattern = top_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.'
+        assign image_widths = "[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100]"
+        assign animation_delay = animation_delay | plus: 150
+      -%}
+
+      <img class="rich-text__top-image-img lazyload"
+        src="{{ 'blank.gif' | asset_img_url: '1x1' }}"
+        data-src="{{ image_url_pattern }}"
+        data-widths= "{{ image_widths }}"
+        data-aspectratio="{{ top_image.aspect_ratio }}"
+        data-sizes="auto"
+        style="width: {{ top_image_width }}px"
+        alt="{{ top_image.alt | escape }}">
+      <noscript>
+        <img src="{{ top_image | img_url: '512x' }}" class="rich-text__top-image-img" style="width: {{ top_image_width }}px" alt="{{ top_image.alt | escape }}">
+      </noscript>
+    </div>
+  {%- endif -%}
+
+  {%- if subheading != blank -%}
+    <div class="subheading-text main-subheading"
+      {% if animations_enabled %}
+        data-aos="fade-up"
+        data-aos-anchor="{{ animation_anchor }}"
+        data-aos-delay="{{ animation_delay }}"
+        {%- assign animation_delay = animation_delay | plus: 150 -%}
+      {% endif %}>{{subheading}}</div>
+  {%- endif -%}
+
+  {%- if heading != blank -%}
+    <h3 class="rich-text__heading h2"
+      {% if animations_enabled %}
+        data-aos="fade-up"
+        data-aos-anchor="{{ animation_anchor }}"
+        data-aos-delay="{{ animation_delay }}"
+        {%- assign animation_delay = animation_delay | plus: 150 -%}
+      {% endif %}>{{ heading }}</h3>
+
+    {%- if settings.show_spacer_lines -%}
+
+      <hr
+        {% if animations_enabled %}
+          data-aos="fade-up"
+          data-aos-delay="{{ animation_delay }}"
+          data-aos-anchor="{{ animation_anchor }}"
+        {% endif %}>
+      {%- assign animation_delay = animation_delay | plus: 150 -%}
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if text != blank -%}
+    <div class="rich-text__text"
+      {% if animations_enabled %}
+        data-aos="fade-up"
+        data-aos-anchor="{{ animation_anchor }}"
+        data-aos-delay="{{ animation_delay }}"
+        {%- assign animation_delay = animation_delay | plus: 150 -%}
+      {% endif %}>{{ text }}</div>
+  {%- endif -%}
+
+  {%- if button_text != blank or secondary_button_text != blank -%}
+    <div class="rich-text__buttons main-buttons">
+      {%- if button_text != blank -%}
+        <div class="main-buttons__item"
+          {% if animations_enabled %}
+            data-aos="fade-up"
+            data-aos-anchor="{{ animation_anchor }}"
+            data-aos-delay="{{ animation_delay }}"
+            {%- assign animation_delay = animation_delay | plus: 150 -%}
+          {% endif %}>
+          <a class="btn {{ button_style }}" href="{{ button_link }}">{{ button_text }}</a>
+        </div>
+      {%- endif -%}
+
+      {%- if secondary_button_text != blank -%}
+        <div class="main-buttons__item"
+          {% if animations_enabled %}
+            data-aos="fade-up"
+            data-aos-anchor="{{ animation_anchor }}"
+            data-aos-delay="{{ animation_delay }}"
+            {%- assign animation_delay = animation_delay | plus: 150 -%}
+          {% endif %}>
+          <a class="btn {{ secondary_button_style }}" href="{{ secondary_button_link }}">{{ secondary_button_text }}</a>
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture video_link -%}
+  {%- unless video_link == blank -%}
+    {%- liquid
+  assign video_link_downcase = video_link | downcase
+  assign video_type = ''
+  assign video_id = ''
+  assign video_parent_id = 'item-video-' | append: unique
+
+  if video_link contains "vimeo.com"
+    assign video_type = "vimeo"
+  elsif video_link contains "youtube.com"
+    assign video_type = "youtube"
+  elsif video_link contains "youtu.be"
+    assign video_type = "youtube"
+    assign youtubeShortlink = true
+  elsif video_link_downcase contains ".mp4"
+    assign video_type = "native"
+  endif
+
+  assign link_array = video_link | split: '/'
+  assign id_with_params = link_array | last
+
+  if video_type == "vimeo" or youtubeShortlink
+  comment
+    https://vimeo.com/[ID]?foo=bar&baz=boo
+    https://youtu.be/[ID]?foo=bar&baz=boo
+  endcomment
+    assign starts_with_id = id_with_params | split: '?'
+    assign video_id = starts_with_id | first
+  elsif video_type == "youtube" 
+  comment
+    https://youtube.com/watch?v=[ID]?foo=bar&baz=boo
+  endcomment
+    assign first_param = id_with_params | split: '&' | first
+    assign watch_then_id = first_param | split: '?'
+    assign equals_id = watch_then_id[1]
+    assign ends_with_id = equals_id | split: '='
+    assign video_id = ends_with_id | last
+  endif
+
+  if video_type == 'youtube'
+    capture video_link
+      echo 'https://www.youtube.com/watch?v=' | append: video_id
+    endcapture
+  elsif video_type == 'vimeo'
+    capture video_link
+      echo 'https://vimeo.com/' | append: video_id
+    endcapture
+  endif
+-%}
+
+    <div class="rich-text__video-link {% if overlay_image_background %} rich-text__video-link--background{% endif %}"
+      {% if animations_enabled %}
+        data-aos="fade-up"
+        data-aos-anchor="{{ animation_anchor }}"
+        data-aos-delay="{{ animation_delay }}"
+        {%- assign animation_delay = animation_delay | plus: 150 -%}
+      {% endif %}>
+      <a class="play-button{% if video_link_color %} {{ video_link_color }}{% endif %}" href="{{ video_link }}"
+        data-video-play="{%- render 'photoswipe-video-html' item_link: video_link , item_link_type: video_type, item_link_id: video_id, item_id: video_parent_id -%}"
+      >
+        {%- render 'icon-play' -%}
+      </a>
+    </div>
+  {%- endunless -%}
+{%- endcapture -%}
+
+{%- liquid
+  assign rich_text_element_class = 'rich-text__wrapper'
+  assign rich_text_wrapper_class = rich_text_element_class
+  assign rich_text_wrapper_class = rich_text_wrapper_class | append: ' ' | append: rich_text_element_class | append: '--' | append: text_position
+
+  if content == blank
+    assign rich_text_wrapper_class = rich_text_wrapper_class | append: ' ' | append: rich_text_element_class | append: '--no-content'
+  endif
+  if video_link == blank
+    assign rich_text_wrapper_class = rich_text_wrapper_class | append: ' ' | append: rich_text_element_class | append: '--no-video'
+  endif
+
+  if text_position == 'inline-left' or text_position == 'inline-right'
+    assign section_width = 'wrapper--full'
+  endif
+-%}
+
+{%- if show_image -%}
+  {%- if overlay_image_background -%}
+    <div class="rich-text__background">
+      {%- unless image == blank -%}
+        <div class="rich-text__background-image {{ bg_position | prepend: 'bg-pos-' }} lazyload"
+          data-bgset="{% render 'bgset', image: image %}"
+          data-parent-fit="cover"
+          data-sizes="auto">
+        </div>
+        <noscript>
+          <div class="rich-text__background-image {{ bg_position | prepend: 'bg-pos-' }} no-js-image" style="background-image: url({{ image | img_url: '2048x' }});"></div>
+        </noscript>
+      {%- else -%}
+        <div class="rich-text__background-image svg-placeholder placeholder-svg--overlayed">
+          {{- 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg-filled' -}}
+        </div>
+      {%- endunless -%}
+    </div>
+  {%- endif -%}
+
+  <div class="{{ section_width }}">
+    <div class="{{ rich_text_wrapper_class }}">
+
+      {%- unless overlay_image_background -%}
+        <div class="rich-text__image">
+          {%- assign animation_delay = 150 -%}
+          {%- unless image == blank -%}
+            <div class="rich-text__image-bg {{ bg_position | prepend: 'bg-pos-' }} lazyload"
+              {% if animations_enabled %}
+                data-aos="fade"
+                data-aos-anchor="{{ animation_anchor }}"
+                data-aos-delay="{{ animation_delay }}"
+              {% endif %}
+              data-bgset="{% render 'bgset', image: image %}"
+              data-aspectratio="{{ image.aspect_ratio }}"
+              data-sizes="auto">
+            </div>
+            <noscript>
+              <div class="rich-text__image-bg {{ bg_position | prepend: 'bg-pos-' }} no-js-image" style="background-image: url({{ image | img_url: '2048x' }});"></div>
+            </noscript>
+          {%- else -%}
+            <div class="rich-text__image-bg rich-text__image-bg--placeholder placeholder-svg--overlayed"
+              {% if animations_enabled %}
+                data-aos="fade-up"
+                data-aos-anchor="{{ animation_anchor }}"
+                data-aos-delay="{{ animation_delay }}"
+              {% endif %}>
+              {{- 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg-filled' -}}
+            </div>
+          {%- endunless -%}
+
+          {{- video_link -}}
+        </div>
+      {%- endunless -%}
+
+      {%- unless content == blank -%}
+        <div class="rich-text__content text-{{ text_alignment }}"
+          {% if animations_enabled and show_image %}
+            data-aos="fade-up"
+            data-aos-anchor="{{ animation_anchor }}"
+          {% endif %}
+          data-overflow-content>
+          {{- content -}}
+        </div>
+      {%- endunless -%}
+
+      {%- if overlay_image_background -%}
+        {{- video_link -}}
+      {%- endif -%}
+    </div>
+  </div>
+{%- else -%}
+  <div class="rich-text rich-text--no-image text-{{ text_position }}">
+    <div class="{{ section_width }}">
+      <div class="rich-text__container">
+        {{- content -}}
+      </div>
+    </div>
+  </div>
+{%- endif -%}

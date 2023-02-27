@@ -1,0 +1,18 @@
+<div data-api-content>
+  {%- if cart.item_count > 0 -%}
+    <div data-api-line-items>
+      {%- render 'cart-line-items', part: 'line-items' -%}
+    </div>
+    <div data-api-upsell-items>
+      {%- render 'cart-line-items', part: 'upsell-items' -%}
+    </div>
+  {%- else -%}
+    {% comment %}
+      The cart is empty
+    {% endcomment %}
+    <div class="text-center">
+      <p>{{ 'cart.general.empty' | t }}</p>
+      <p><a href="{{ routes.root_url }}" class="btn">{{ 'cart.general.continue_shopping' | t }}</a></p>
+    </div>
+  {%- endif -%}
+</div>
